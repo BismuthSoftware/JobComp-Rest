@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+        <tempdirectory>/prod/jComp/temp</tempdirectory>
+        <filepath>/jp1File</filepath>
+        <rootfolder>
+                <add key="0" value="AJSROOT2" />
+        </rootfolder>
+        <remoterootfolder>
+                <add key="0" value="AJSROOT1" />
+                <add key="1" value="AJSROOT2" />
+        </remoterootfolder>
+        <host>10.10.0.66</host>
+        <port>6017</port>
+        <database>jComp</database>
+        <remotehost>http://10.110.0.80:8081</remotehost>
+        <!-- <remotehost>http://192.168.0.171:8080</remotehost>  -->
+        <latetime>
+                <add key="from" value="09:00" />
+                <add key="to" value="18:00" />
+        </latetime>
+        <!-- for password -->
+        <minpwdlength>8</minpwdlength>
+        <maxpwdlength>15</maxpwdlength>
+        <uppercase>Y</uppercase>
+        <number>Y</number>
+        <specialcharacter>Y</specialcharacter>
+        <userinfo>/data/jp1/irfapp1/jp1ajs2/jobinf</userinfo>
+        <movePath>/jComp/Exejp1File</movePath>
+        <loginMode>1</loginMode>
+        <loginVersion>g1</loginVersion>
+        <loginModeFile>Y</loginModeFile>
+        <loginModeMonitoring>N</loginModeMonitoring>
+        <targetcount>3</targetcount>
+        <loginEmail>N</loginEmail>
+    <!-- multi logic hostname.-->
+        <hostname>irfapp1-vip</hostname>    
+</configuration>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>        
+        <filepath>/jp1File</filepath>
+        <rootfolder>
+                <add key="0" value="AJSROOT1" />
+                <add key="1" value="AJSROOT2" />
+        </rootfolder>
+</configuration>
