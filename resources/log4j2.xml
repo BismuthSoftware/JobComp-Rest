@@ -4,8 +4,8 @@
  
     <Properties>
         <Property name="format1">%d{yyyy/MM/dd HH:mm:ss.SSS} [%t] %-6p %m%n</Property>
-        <Property name="logfile">logs/jCompRest.log</Property>
-        <Property name="logfile-archive">logs/jCompRest_%d{yyyy-MM-dd}-%i.log</Property>
+        <Property name="logfile">logs/jobCompRest.log</Property>
+        <Property name="logfile-archive">logs/jobCompRest_%d{yyyy-MM-dd}-%i.log</Property>
     </Properties>
     
 	<Appenders>

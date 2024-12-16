@@ -8,9 +8,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class JCompRestApplication {
+public class JobCompRestApplication {
 	public static void main(String[] args) {
-		SpringApplication application = new SpringApplication(new Class[]{ JCompRestApplication.class });		
+		SpringApplication application = new SpringApplication(new Class[]{ JobCompRestApplication.class });		
 		application.addListeners(new ApplicationListener[]{new ApplicationPidFileWriter("./bin/shutdown.pid")});
 		application.run(args);
 	}

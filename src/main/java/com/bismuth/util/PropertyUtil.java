@@ -13,7 +13,7 @@ public class PropertyUtil {
 	public static void loadDbConfig() throws Exception {
 		try {
 			StringBuilder sb = new StringBuilder();
-			String fileName = sb.append((new File("")).getCanonicalPath()).append(File.separator).append("conf").append(File.separator).append("jcompRest.xml").toString();
+			String fileName = sb.append((new File("")).getCanonicalPath()).append(File.separator).append("conf").append(File.separator).append("jobcompRest.xml").toString();
 			File file = new File(fileName);
 			
 			if(!file.exists()) {

@@ -21,7 +21,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
-group = 'com.bismuth.jcompRest'
+group = 'com.bismuth.jobcompRest'
 sourceCompatibility = '1.8'
 
 repositories {
