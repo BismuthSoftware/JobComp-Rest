@@ -174,7 +174,7 @@ public class JobMonitorController {
 	@RequestMapping(value = {"/transferRootJobNetDevtoDev"}, method = {RequestMethod.POST})
 	public String transferRootJobNetDevtoDev(String sourceServiceName, String targetServiceName, String unit, String path) throws IOException {
 		String transferPath = "";
-		
+
 		if("".equals(path)) {
 			path = "/";
 			transferPath = path + unit;
@@ -183,27 +183,27 @@ public class JobMonitorController {
 		}
 
 		System.out.println("transferPath : " + transferPath);
-		
+
 		StringBuilder command = new StringBuilder();
-		
+
 		command.append("ajsprint -F ").append(sourceServiceName);
 		command.append(" -N ").append("\"" + transferPath + "\"");
-		
+
 		System.out.println("transferRootJobNetDevtoDev command : " + command.toString());
-		
+
 		String jobNetList = CommandLineExecutor.execute(command.toString());
 		StringBuilder filePath = new StringBuilder();
-		
+
 		filePath.append((new File("")).getCanonicalPath()).append(PropertyUtil.getProperty("filepath"));
-		
+
 		StringBuilder fileName = new StringBuilder();
-		
+
 		fileName.append(unit).append("-");
 		fileName.append(this.getCurrentDate("yyyyMMddHHmmss")).append(".dmp");
-		
+
 		FileDownload.download(filePath.toString(), fileName.toString(), jobNetList);
 		String result = this.transferCommand(targetServiceName, path, unit, filePath.toString(), fileName.toString());
-		
+
 		return result;
 	}
 
@@ -225,13 +225,13 @@ public class JobMonitorController {
 	private String transferCommand(String serviceName, String path, String unit, String filePath, String fileName) {
 		StringBuilder command = new StringBuilder();
 		String unitPath = "";
-		
+
 		if("/".equals(path)) {
 			unitPath = unit;
 		} else {
 			unitPath = "/" + unit;
 		}
-		
+
 		boolean runFlag = true;
 
 		while(runFlag) {
@@ -240,11 +240,11 @@ public class JobMonitorController {
 			command.append("ajskill -F ").append(serviceName);
 			command.append(" -T ").append(path);
 			command.append(unitPath);
-	      
+
 			System.out.println("transferCommand command : " + command.toString());
 
 			String killOutput = CommandLineExecutor.execute(command.toString());
-	      
+
 			System.out.println("killOutput : " + killOutput);
 
 			command.setLength(0);
@@ -255,7 +255,7 @@ public class JobMonitorController {
 			System.out.println("transferCommand command : " + command.toString());
 
 			String resultValue = CommandLineExecutor.execute(command.toString());
-	      
+
 			System.out.println("resultValue : " + resultValue);
 
 			if(resultValue != null) {
@@ -269,7 +269,7 @@ public class JobMonitorController {
 				}
 			}
 	    }
-		
+
 	    command.setLength(0);
 	    command.append("ajsleave -F ").append(serviceName);
 	    command.append(" -T ").append(path);
@@ -278,7 +278,7 @@ public class JobMonitorController {
 	    System.out.println("transferCommand command : " + command.toString());
 
 	    String resultValue = CommandLineExecutor.execute(command.toString());
-	    
+
 	    System.out.println("resultValue : " + resultValue);
 
 	    command.setLength(0);
@@ -291,7 +291,7 @@ public class JobMonitorController {
 	    Map<String, Object> output = CommandLineExecutor.executeYes(command.toString());
 
 	    String result = (String)output.get("result");
-	    
+
 	    System.out.println("result : " + result);
 
 	    return result;
@@ -301,9 +301,9 @@ public class JobMonitorController {
 		String now = "";
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
-		
+
 		now = format.format(date);
-		
+
 		return now;
 	}
 }
