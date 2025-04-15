@@ -27,31 +27,31 @@ public class JobMonitorController {
 		Map<String, String> serviceList = PropertyUtil.getProperties("rootfolder");
 		StringBuilder command = new StringBuilder();
 		Iterator<Entry<String, String>> localIterator = serviceList.entrySet().iterator();
-		
+
 		if(localIterator.hasNext()) {
 			Map.Entry<String, String> entry = (Map.Entry<String, String>) localIterator.next();
 			String serviceName = (String) entry.getValue();
-			
+
 			command.setLength(0);
 			command.append("ajsprint -F ").append(serviceName);
 			command.append(" -f \"%jn^%cm\" -G ").append("\"/*\"");
-			
+
 			String groupList = CommandLineExecutor.execute(command.toString());
-			
+
 			commandList.add(groupList);
 			command.setLength(0);
 			command.append("ajsshow -F ").append(serviceName);
 			command.append(" -f \"%j^%p^%C^%d^%s^%k^%e\" -E ").append("\"/*\"");
-			
+
 			String jobExeList = CommandLineExecutor.execute(command.toString());
-			
+
 			commandList.add(jobExeList);
 			command.setLength(0);
 			command.append("ajsprint -F ").append(serviceName);
 			command.append(" -f \"%jn^%cm\" -N ").append("\"/*\"");
-			
+
 			String jobAllList = CommandLineExecutor.execute(command.toString());
-			
+
 			commandList.add(jobAllList);
 		}
 
