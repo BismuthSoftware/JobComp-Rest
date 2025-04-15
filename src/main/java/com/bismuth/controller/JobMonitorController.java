@@ -62,28 +62,28 @@ public class JobMonitorController {
 	public List<String> remoteJobGroupNetInfo(String serviceName, String path) {
 		List<String> commandList = new ArrayList<String>();
 		StringBuilder command = new StringBuilder();
-		
+
 		command.append("ajsprint -F ").append(serviceName);
 		command.append(" -f \"%jn^%cm\" -G ").append("\"" + path + "\"");
-		
+
 		String jobGroupList = CommandLineExecutor.execute(command.toString());
-		
+
 		commandList.add(jobGroupList);
 		command.setLength(0);
 		command.append("ajsshow -F ").append(serviceName);
 		command.append(" -f \"%j^%p^%C^%d^%s^%k^%e\" -E ").append("\"" + path + "\"");
-		
+
 		String jobExeList = CommandLineExecutor.execute(command.toString());
-		
+
 		commandList.add(jobExeList);
 		command.setLength(0);
 		command.append("ajsprint -F ").append(serviceName);
 		command.append(" -f \"%jn^%cm\" -N ").append("\"" + path + "\"");
-		
+
 		String jobAllList = CommandLineExecutor.execute(command.toString());
-		
+
 		commandList.add(jobAllList);
-		
+
 		return commandList;
 	}
 
