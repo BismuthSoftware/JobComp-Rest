@@ -222,7 +222,7 @@ public class JobMonitorController {
 		return resourceGroup;
 	}
 
-	private String transferCommand(String serviceName, String path, String unit, String filePath, String fileName) {
+	private String transferCommand(String serviceName, String path, String unit, String filePath, String fileName) throws IOException {
 		StringBuilder command = new StringBuilder();
 		String unitPath = "";
 
@@ -231,7 +231,17 @@ public class JobMonitorController {
 		} else {
 			unitPath = "/" + unit;
 		}
-
+		
+		command.setLength(0);
+		command.append("ajsprint -F ").append(serviceName);
+		command.append(" -f \"%JN\" ").append(path);
+		
+		String checkPath = CommandLineExecutor.execute(command.toString());
+		
+		if(checkPath.contains("KAVS0161-I") && !"/".equals(path)) {			
+			this.checkJobGroup(serviceName, path);
+		}
+		
 		boolean runFlag = true;
 
 		while(runFlag) {
@@ -305,5 +315,28 @@ public class JobMonitorController {
 		now = format.format(date);
 
 		return now;
+	}
+	
+	private void checkJobGroup(String serviceName, String path) throws IOException {
+		StringBuilder command = new StringBuilder();
+		String[] result1 = path.split("/");		
+		String currentPath = "";
+		String prePath = "";
+
+		for(int i = 1; i < result1.length; i++) {
+			prePath = i == 1 ? "/" : currentPath;
+			currentPath = currentPath + "/";
+			currentPath = currentPath + result1[i];
+
+			command.setLength(0);
+			command.append("ajsprint -F ").append(serviceName);
+			command.append(" ");
+			command.append(currentPath);
+			String result = CommandLineExecutor.execute(command.toString());			
+			
+			if(result.contains("KAVS0161-I")) {					
+				FileDownload.createJobGroupFile(serviceName, prePath, result1[i]);
+			}
+		}
 	}
 }
