@@ -141,6 +141,17 @@ public class JobMonitorController {
 		FileDownload.download(filePath.toString(), fileName.toString(), rootJobNetInfo.toString());
 		StringBuilder command = new StringBuilder();
 		
+		command.setLength(0);
+		command.append("ajsprint -F ").append(serviceName);
+		command.append(" -f \"%JN\" ").append(path);
+		
+		String checkPath = CommandLineExecutor.execute(command.toString());
+		
+		if(checkPath.contains("KAVS0161-I") && !"/".equals(path)) {			
+			this.checkJobGroup(serviceName, path);
+		}
+		
+		command.setLength(0);
 		command.append("ajsdefine -F ").append(serviceName);
 		command.append(" -S -p -i -d ").append(path).append(" ");
 		command.append(filePath.toString()).append(File.separator).append(fileName);
